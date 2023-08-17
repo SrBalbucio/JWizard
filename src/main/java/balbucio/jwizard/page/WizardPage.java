@@ -25,7 +25,6 @@ public class WizardPage{
     @Getter
     private JPanel panel;
     private JPanel componentPanel;
-    private GridBagConstraints gbc = new GridBagConstraints();
 
     public WizardPage(String title, String description, Image icon) {
         this(title, description, icon, new ArrayList<>());
@@ -37,11 +36,12 @@ public class WizardPage{
         this.icon = icon;
         this.componentList = componentList;
         this.panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
         this.componentPanel = new JPanel();
+
         BoxLayout layout = new BoxLayout(componentPanel, BoxLayout.Y_AXIS);
         componentPanel.setLayout(layout);
-        panel.add(componentPanel, gbc);
+        panel.add(componentPanel);
+
         reload();
     }
 
@@ -53,5 +53,7 @@ public class WizardPage{
     public void reload(){
         componentPanel.removeAll();
         componentList.forEach(w -> componentPanel.add(w.getComponent()));
+        componentPanel.revalidate();
+        componentPanel.repaint();
     }
 }
