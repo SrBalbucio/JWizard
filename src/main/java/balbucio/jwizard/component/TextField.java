@@ -14,17 +14,20 @@ public class TextField implements WizardComponent {
 
     private String title;
     private JPanel panel;
+    @Getter
+    @Setter
     private boolean required;
-
     @Getter
     @Setter
-    private int width = 240;
-    @Getter
-    @Setter
-    private int height = 24;
+    private int width = 240,  height = 24;
 
     public TextField(String title) {
+        this(title, false);
+    }
+
+    public TextField(String title, boolean required){
         this.title = title;
+        this.required = required;
     }
 
     private JLabel text;
@@ -32,12 +35,12 @@ public class TextField implements WizardComponent {
 
     @Override
     public boolean isRequired() {
-        return false;
+        return required;
     }
 
     @Override
     public boolean isCompleted() {
-        return false;
+        return !field.getText().isEmpty();
     }
 
     @Override
@@ -47,7 +50,8 @@ public class TextField implements WizardComponent {
 
     @Override
     public JComponent getComponent() {
-        text = new JLabel(title);
+        String finalTitle = isRequired() ? title +"*" : title;
+        text = new JLabel(finalTitle);
         field = new JTextField();
         field.addActionListener(e -> panel.setBorder(new EmptyBorder(0,0,0,0)));
         field.setPreferredSize(new Dimension(width, height));

@@ -42,12 +42,16 @@ public class JWizard {
     }
 
     public void next(){
-        if((page + 1) <= pages.size()){
-            page++;
-            setPage(page);
+        WizardPage p = pages.get(page);
+        if(p.isCompleted()) {
+            if ((page + 1) <= pages.size()) {
+                page++;
+                setPage(page);
+            }
+            buttonReload();
+        } else{
+            p.warn();
         }
-        System.out.println(page);
-        buttonReload();
     }
 
     public void cancel(){
@@ -81,9 +85,11 @@ public class JWizard {
         }
 
         if((page+1) >= pages.size()){
-            next.setEnabled(false);
+            next.setEnabled(true);
+            next.setText(WizardLang.FINISH_BUTTON);
         } else{
             next.setEnabled(true);
+            next.setText(WizardLang.NEXT_BUTTON);
         }
     }
 

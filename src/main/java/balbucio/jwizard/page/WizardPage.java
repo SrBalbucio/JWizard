@@ -45,6 +45,18 @@ public class WizardPage{
         reload();
     }
 
+    public boolean isCompleted(){
+        return componentList.stream().allMatch(WizardComponent::isCompleted);
+    }
+
+    public void warn(){
+        componentList.forEach(c -> {
+            if(!c.isCompleted() && c.isRequired()){
+                c.warn();
+            }
+        });
+    }
+
     public void addComponent(WizardComponent... component){
         componentList.addAll(List.of(component));
         reload();
