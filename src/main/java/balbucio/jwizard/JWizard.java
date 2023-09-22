@@ -37,16 +37,18 @@ public class JWizard {
             page--;
             setPage(page);
         }
-        System.out.println(page);
         buttonReload();
     }
 
     public void next(){
         WizardPage p = pages.get(page);
         if(p.isCompleted()) {
-            if ((page + 1) <= pages.size()) {
+            if ((page + 1) < pages.size()) {
                 page++;
                 setPage(page);
+            } else{
+                dialog.setVisible(false);
+                dialog.dispose();
             }
             buttonReload();
         } else{
@@ -55,7 +57,8 @@ public class JWizard {
     }
 
     public void cancel(){
-
+        dialog.setVisible(false);
+        dialog.dispose();
     }
 
     public void addPage(WizardPage page){

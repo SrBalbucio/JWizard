@@ -1,39 +1,32 @@
 package balbucio.jwizard.component;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 
-public class TextField implements WizardComponent {
+public class Checkbox implements WizardComponent{
+
     @Getter
     private String id;
     private String title;
-    private JPanel panel;
-    @Getter
-    @Setter
     private boolean required;
-    @Getter
-    @Setter
-    private int width = 240,  height = 24;
 
-    public TextField(String id, String title) {
+    public Checkbox(String id, String title){
         this(id, title, false);
     }
 
-    public TextField(String id, String title, boolean required){
+    public Checkbox(String id, String title, boolean required){
         this.id = id;
         this.title = title;
         this.required = required;
     }
 
-    private JLabel text;
-    private JTextField field;
+    private JPanel panel;
+    private JCheckBox checkBox;
+
 
     @Override
     public boolean isRequired() {
@@ -42,7 +35,7 @@ public class TextField implements WizardComponent {
 
     @Override
     public boolean isCompleted() {
-        return !field.getText().isEmpty();
+        return true;
     }
 
     @Override
@@ -53,18 +46,16 @@ public class TextField implements WizardComponent {
     @Override
     public JComponent getComponent() {
         String finalTitle = isRequired() ? title +"*" : title;
-        text = new JLabel(finalTitle);
-        field = new JTextField();
-        field.addActionListener(e -> panel.setBorder(new EmptyBorder(0,0,0,0)));
-        field.setPreferredSize(new Dimension(width, height));
+        checkBox = new JCheckBox(finalTitle);
+        checkBox.addActionListener(e -> panel.setBorder(new EmptyBorder(0,0,0,0)));
+        checkBox.setPreferredSize(new Dimension(240, 24));
         panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel.add(text);
-        panel.add(field);
+        panel.add(checkBox);
         return panel;
     }
 
     @Override
-    public String getValue() {
-        return field.getText();
+    public Object getValue() {
+        return checkBox.isSelected();
     }
 }

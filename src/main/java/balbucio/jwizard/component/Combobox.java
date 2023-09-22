@@ -1,27 +1,33 @@
 package balbucio.jwizard.component;
 
+import lombok.Getter;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
 public class Combobox implements WizardComponent{
 
+    @Getter
+    public String id;
     private String title;
     private String selected;
     private List<String> options;
     private boolean required;
     private int width, height;
 
-    public Combobox(String title, List<String> options) {
-        this(title, null, options, false);
+    public Combobox(String id, String title, List<String> options) {
+        this(id, title, null, options, false);
     }
 
-    public Combobox(String title, String selected, List<String> options) {
-        this(title, selected, options, false);
+    public Combobox(String id, String title, String selected, List<String> options) {
+        this(id, title, selected, options, false);
     }
-    public Combobox(String title, String selected, List<String> options, boolean required) {
+    public Combobox(String id, String title, String selected, List<String> options, boolean required) {
+        this.id = id;
         this.title = title;
         this.selected = selected;
         this.options = options;
@@ -40,12 +46,13 @@ public class Combobox implements WizardComponent{
 
     @Override
     public boolean isCompleted() {
-        return false;
+        return comboBox.getSelectedItem() != null;
     }
 
     @Override
     public void warn() {
-
+        panel.setBorder(new LineBorder(Color.RED));
+        comboBox.setBorder(new LineBorder(Color.RED));
     }
 
     @Override
@@ -63,6 +70,6 @@ public class Combobox implements WizardComponent{
 
     @Override
     public Object getValue() {
-        return null;
+        return comboBox.getSelectedItem();
     }
 }
