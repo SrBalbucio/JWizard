@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class WizardTest {
 
     public static void main(String[] args) {
-        JWizard wizard = new JWizard("Teste de Wizard", null);
+        JWizard wizard = new JWizard("Teste de Wizard");
         WizardPage page = wizard.createPage("Informações Pessoais", "Complete todos os campos", null);
         page.addComponent(new TextField("nome","Qual seu nome?", true),
                 new TextField("vulgo", "Qual seu vulgo?", true),

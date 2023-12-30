@@ -46,7 +46,15 @@ public class WizardPage{
     }
 
     public boolean isCompleted(){
-        return componentList.stream().allMatch(WizardComponent::isCompleted);
+        return componentList.stream().allMatch(c -> {
+            if(c.isRequired() && c.isCompleted()){
+                return true;
+            } else if(c.isRequired() && !c.isCompleted()){
+                return false;
+            } else{
+                return true;
+            }
+        });
     }
 
     public void warn(){

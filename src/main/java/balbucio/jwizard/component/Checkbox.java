@@ -12,7 +12,7 @@ public class Checkbox implements WizardComponent{
     @Getter
     private String id;
     private String title;
-    private boolean required;
+    private boolean required = false;
 
     public Checkbox(String id, String title){
         this(id, title, false);

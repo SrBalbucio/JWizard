@@ -17,7 +17,7 @@ public class TextField implements WizardComponent {
     private JPanel panel;
     @Getter
     @Setter
-    private boolean required;
+    private boolean required = false;
     @Getter
     @Setter
     private int width = 240,  height = 24;

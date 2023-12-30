@@ -16,7 +16,7 @@ public class Combobox implements WizardComponent{
     private String title;
     private String selected;
     private List<String> options;
-    private boolean required;
+    private boolean required = false;
     private int width, height;
 
     public Combobox(String id, String title, List<String> options) {
@@ -41,7 +41,7 @@ public class Combobox implements WizardComponent{
 
     @Override
     public boolean isRequired() {
-        return false;
+        return required;
     }
 
     @Override

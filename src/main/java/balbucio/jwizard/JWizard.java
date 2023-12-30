@@ -10,13 +10,25 @@ import java.util.List;
 public class JWizard {
 
     private String title;
-    private JDialog dialog;
+    private Window dialog;
     private List<WizardPage> pages;
     private int page = 0;
 
     public JWizard(String title, JFrame owner){
         this.title = title;
         this.dialog = new JDialog(owner, title);
+        dialog.setSize(680, 420);
+        dialog.setLayout(new BorderLayout());
+        this.pages = new ArrayList<>();
+        dialog.add(getNorthPanel(), BorderLayout.NORTH);
+        dialog.add(getCenterPanel(), BorderLayout.CENTER);
+        dialog.add(getSouthPanel(), BorderLayout.SOUTH);
+        dialog.setVisible(true);
+    }
+
+    public JWizard(String title){
+        this.title = title;
+        this.dialog = new JFrame(title);
         dialog.setSize(680, 420);
         dialog.setLayout(new BorderLayout());
         this.pages = new ArrayList<>();
