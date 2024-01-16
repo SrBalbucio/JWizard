@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class WizardPage{
@@ -66,7 +67,7 @@ public class WizardPage{
     }
 
     public void addComponent(WizardComponent... component){
-        componentList.addAll(List.of(component));
+        componentList.addAll(Arrays.asList(component));
         reload();
     }
 

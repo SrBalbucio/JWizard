@@ -1,8 +1,10 @@
 package balbucio.jwizard;
 
+import balbucio.jwizard.page.TermsPage;
 import balbucio.jwizard.page.WizardPage;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +89,14 @@ public class JWizard {
         stepTitle.setText(p.getTitle());
         stepDesc.setText(p.getDescription());
         centerPanel.removeAll();
-        centerPanel.add(p.getPanel());
+        JPanel cp = p.getPanel();
+        dialog.remove(centerPanel);
+        if(p instanceof TermsPage){
+            centerPanel = cp;
+        } else {
+            centerPanel = new JScrollPane(cp);
+        }
+        dialog.add(centerPanel, BorderLayout.CENTER);
         dialog.revalidate();
         dialog.repaint();
     }
@@ -133,10 +142,10 @@ public class JWizard {
         return panel;
     }
 
-    private JPanel centerPanel;
-    private JPanel getCenterPanel(){
-        centerPanel = new JPanel();
-        return centerPanel;
+    private JComponent centerPanel;
+    private JScrollPane getCenterPanel(){
+        centerPanel = new JScrollPane();
+        return (JScrollPane) centerPanel;
     }
 
     private JButton previous;

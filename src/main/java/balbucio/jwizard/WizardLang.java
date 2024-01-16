@@ -7,4 +7,6 @@ public class WizardLang {
     public static String FINISH_BUTTON = "Finalizar";
     public static String CANCEL_BUTTON = "Cancelar";
     public static String SELECT_FILE_BUTTON = "Selecionar arquivos...";
+    public static String TEXT_TERMS = "Leia atentamente os Termos de Uso:";
+    public static String TEXT_TERMS_CHECK = "Você concorda com os Termos de Uso?";
 }
