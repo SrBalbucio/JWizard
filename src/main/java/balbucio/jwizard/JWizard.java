@@ -2,6 +2,7 @@ package balbucio.jwizard;
 
 import balbucio.jwizard.page.TermsPage;
 import balbucio.jwizard.page.WizardPage;
+import lombok.Getter;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -12,7 +13,9 @@ import java.util.List;
 public class JWizard {
 
     private String title;
+    @Getter
     private Window dialog;
+    @Getter
     private List<WizardPage> pages;
     private int page = 0;
 
@@ -38,6 +41,10 @@ public class JWizard {
         dialog.add(getCenterPanel(), BorderLayout.CENTER);
         dialog.add(getSouthPanel(), BorderLayout.SOUTH);
         dialog.setVisible(true);
+    }
+
+    public void setSize(int w, int h){
+        dialog.setSize(w, h);
     }
 
     public WizardPage createPage(String title, String description, Image icon){
