@@ -50,11 +50,7 @@ public class WizardPage{
         return componentList.stream().allMatch(c -> {
             if(c.isRequired() && c.isCompleted()){
                 return true;
-            } else if(c.isRequired() && !c.isCompleted()){
-                return false;
-            } else{
-                return true;
-            }
+            } else return !c.isRequired() || c.isCompleted();
         });
     }
 

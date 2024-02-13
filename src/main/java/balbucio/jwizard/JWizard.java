@@ -130,21 +130,21 @@ public class JWizard {
 
     private JPanel getNorthPanel(){
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        panel.setBackground(Color.lightGray);
+        panel.setBackground(WizardColors.BACKGROUND_COLOR);
         JPanel info = new JPanel();
-        info.setBackground(Color.LIGHT_GRAY);
+        info.setBackground(WizardColors.BACKGROUND_COLOR);
         BoxLayout layout = new BoxLayout(info, BoxLayout.Y_AXIS);
         info.setLayout(layout);
         stepTitle = new JLabel("");
-        stepTitle.setBackground(Color.lightGray);
+        stepTitle.setBackground(WizardColors.BACKGROUND_COLOR);
         stepTitle.setFont(stepTitle.getFont().deriveFont(Font.BOLD, 14f));
         stepDesc = new JLabel("");
-        stepDesc.setBackground(Color.lightGray);
+        stepDesc.setBackground(WizardColors.BACKGROUND_COLOR);
         info.add(stepTitle);
         info.add(stepDesc);
         panel.add(info);
         stepIcon = new JLabel("");
-        stepDesc.setBackground(Color.lightGray);
+        stepDesc.setBackground(WizardColors.BACKGROUND_COLOR);
         panel.add(stepIcon);
         return panel;
     }
@@ -161,7 +161,7 @@ public class JWizard {
 
     private JPanel getSouthPanel(){
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panel.setBackground(Color.lightGray);
+        panel.setBackground(WizardColors.BACKGROUND_COLOR);
         previous = new JButton(WizardLang.PREVIOUS_BUTTON);
         previous.addActionListener(e -> previous());
         previous.setEnabled(false);
