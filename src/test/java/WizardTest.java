@@ -68,6 +68,6 @@ public class WizardTest {
                 new TextField("amiga", "Qual nome da sua melhor amiga?"));
         WizardPage page4 = wizard.createPage("Informações extras", "Complete todos os campos", null);
         page4.addComponent(new Checkbox("java", "Você que isto é feito em java?"),
-                new FileSelector("files", "Selecione a foto dos documento: "));
+                new FileSelector("files", "Selecione a foto dos documento: "), new PathSelector("path", "Selecione um path: ", true));
     }
 }
