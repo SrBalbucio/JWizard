@@ -1,5 +1,7 @@
 package balbucio.jwizard;
 
+import balbucio.jwizard.listener.WizardListener;
+import balbucio.jwizard.page.ProgressPage;
 import balbucio.jwizard.page.TermsPage;
 import balbucio.jwizard.page.WizardPage;
 import lombok.Getter;
@@ -7,8 +9,11 @@ import lombok.Getter;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class JWizard {
 
@@ -18,6 +23,7 @@ public class JWizard {
     @Getter
     private List<WizardPage> pages;
     private int page = 0;
+    private List<WizardListener> listeners = new ArrayList<>();
 
     public JWizard(String title, JFrame owner){
         this.title = title;
@@ -43,6 +49,10 @@ public class JWizard {
         dialog.setVisible(true);
     }
 
+    public void addListener(WizardListener listener){
+        listeners.add(listener);
+    }
+
     public void setSize(int w, int h){
         dialog.setSize(w, h);
     }
@@ -64,10 +74,12 @@ public class JWizard {
     public void next(){
         WizardPage p = pages.get(page);
         if(p.isCompleted()) {
+            listeners.forEach(l -> l.completedPage(p, page));
             if ((page + 1) < pages.size()) {
                 page++;
                 setPage(page);
             } else{
+                listeners.forEach(l -> l.finished(this));
                 dialog.setVisible(false);
                 dialog.dispose();
             }
@@ -93,6 +105,7 @@ public class JWizard {
     public void setPage(int i){
         page = i;
         WizardPage p = pages.get(i);
+        listeners.forEach(l -> l.changePage(p, i));
         stepTitle.setText(p.getTitle());
         stepDesc.setText(p.getDescription());
         centerPanel.removeAll();
@@ -100,6 +113,8 @@ public class JWizard {
         dialog.remove(centerPanel);
         if(p instanceof TermsPage){
             centerPanel = cp;
+        } else if(p instanceof ProgressPage){
+            centerPanel = ((ProgressPage) p).getPanel();
         } else {
             centerPanel = new JScrollPane(cp);
         }
@@ -116,7 +131,7 @@ public class JWizard {
         }
 
         if((page+1) >= pages.size()){
-            next.setEnabled(true);
+            next.setEnabled(getPages().get(page).isCompleted());
             next.setText(WizardLang.FINISH_BUTTON);
         } else{
             next.setEnabled(true);

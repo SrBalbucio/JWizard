@@ -1,7 +1,10 @@
 import balbucio.jwizard.JWizard;
 import balbucio.jwizard.component.*;
+import balbucio.jwizard.listener.WizardListener;
+import balbucio.jwizard.page.ProgressPage;
 import balbucio.jwizard.page.TermsPage;
 import balbucio.jwizard.page.WizardPage;
+import javafx.scene.control.ProgressBar;
 
 import java.util.Arrays;
 
@@ -69,5 +72,37 @@ public class WizardTest {
         WizardPage page4 = wizard.createPage("Informações extras", "Complete todos os campos", null);
         page4.addComponent(new Checkbox("java", "Você que isto é feito em java?"),
                 new FileSelector("files", "Selecione a foto dos documento: "), new PathSelector("path", "Selecione um path: ", true));
+        ProgressPage progress = new ProgressPage("Instalando...", "Copiando o virus :D", null);
+        wizard.addPage(progress);
+        wizard.addListener(new WizardListener() {
+            @Override
+            public void changePage(WizardPage page, int index) {
+                if(index == 5) {
+                    Thread th = new Thread(() -> {
+                        int i = 0;
+                        while (i < 100) {
+                            try {
+                                i++;
+                                progress.getProgressBar().setValue(i);
+                                Thread.sleep(1500);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    th.start();
+                }
+            }
+
+            @Override
+            public void completedPage(WizardPage page, int index) {
+
+            }
+
+            @Override
+            public void finished(JWizard wizard) {
+
+            }
+        });
     }
 }
