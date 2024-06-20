@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class JWizard {
 
@@ -79,7 +80,9 @@ public class JWizard {
                 page++;
                 setPage(page);
             } else{
-                listeners.forEach(l -> l.finished(this));
+                ConcurrentHashMap<String, Object> results = new ConcurrentHashMap<>();
+                pages.forEach(page1 -> results.putAll(page1.getResults()));
+                listeners.forEach(l -> l.finished(this, results));
                 dialog.setVisible(false);
                 dialog.dispose();
             }
@@ -115,6 +118,9 @@ public class JWizard {
             centerPanel = cp;
         } else if(p instanceof ProgressPage){
             centerPanel = ((ProgressPage) p).getPanel();
+            ((ProgressPage) p).getProgressBar().addChangeListener((e) -> {
+                buttonReload();
+            });
         } else {
             centerPanel = new JScrollPane(cp);
         }

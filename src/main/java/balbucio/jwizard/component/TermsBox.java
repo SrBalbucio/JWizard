@@ -57,7 +57,7 @@ public class TermsBox implements WizardComponent{
         termsText.setBorder(new LineBorder(Color.BLACK));
         termsText.setMargin(new Insets(20, 20, 20, 20));
         scroll = new JScrollPane(termsText);
-        scroll.setMaximumSize(new Dimension(900, 200));
+        scroll.setMaximumSize(new Dimension(1280, 200));
         panel.add(scroll);
         checkbox = new JCheckBox(WizardLang.TEXT_TERMS_CHECK);
         panel.add(checkbox);

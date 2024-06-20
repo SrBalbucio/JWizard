@@ -7,6 +7,7 @@ import balbucio.jwizard.page.WizardPage;
 import javafx.scene.control.ProgressBar;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class WizardTest {
 
@@ -70,7 +71,7 @@ public class WizardTest {
                 new TextField("amigo", "Qual nome do seu melhor amigo?"),
                 new TextField("amiga", "Qual nome da sua melhor amiga?"));
         WizardPage page4 = wizard.createPage("Informações extras", "Complete todos os campos", null);
-        page4.addComponent(new Checkbox("java", "Você que isto é feito em java?"),
+        page4.addComponent(new Checkbox("java", "Você sabia que isto é feito em java?"),
                 new FileSelector("files", "Selecione a foto dos documento: "), new PathSelector("path", "Selecione um path: ", true));
         ProgressPage progress = new ProgressPage("Instalando...", "Copiando o virus :D", null);
         wizard.addPage(progress);
@@ -83,7 +84,7 @@ public class WizardTest {
                         while (i < 100) {
                             try {
                                 i++;
-                                progress.getProgressBar().setValue(i);
+                                progress.addToProgress(i);
                                 Thread.sleep(1500);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -100,8 +101,10 @@ public class WizardTest {
             }
 
             @Override
-            public void finished(JWizard wizard) {
-
+            public void finished(JWizard wizard, Map<String, Object> resultados) {
+                resultados.forEach((k, v) -> {
+                    System.out.println(k+" : "+v);
+                });
             }
         });
     }

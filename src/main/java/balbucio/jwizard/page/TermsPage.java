@@ -14,6 +14,10 @@ public class TermsPage extends WizardPage{
         this.box = box;
     }
 
+    @Override
+    public boolean isCompleted() {
+        return box.isCompleted();
+    }
 
     @Override
     public JPanel getPanel() {

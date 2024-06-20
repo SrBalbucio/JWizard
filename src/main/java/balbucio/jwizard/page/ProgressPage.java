@@ -18,7 +18,7 @@ public class ProgressPage extends WizardPage {
     @Getter
     private JProgressBar progressBar = new JProgressBar(0, 100);
     @Getter
-    private JTextArea console;
+    private JTextArea console;;
 
     public void addToProgress(int size){
         progressBar.setValue(progressBar.getValue() + size);

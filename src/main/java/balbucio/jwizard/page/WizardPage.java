@@ -6,8 +6,7 @@ import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
 
 public class WizardPage{
@@ -44,6 +43,12 @@ public class WizardPage{
         panel.add(componentPanel);
 
         reload();
+    }
+
+    public Map<String, Object> getResults(){
+        Map<String, Object> results = new HashMap<>();
+        componentList.forEach((w) -> results.put(w.getId(), w.getValue()));
+        return results;
     }
 
     public boolean isCompleted(){
