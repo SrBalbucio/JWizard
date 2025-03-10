@@ -63,6 +63,10 @@ public class TextField implements WizardComponent {
         return panel;
     }
 
+    public void setValue(String value){
+        field.setText(value);
+    }
+
     @Override
     public String getValue() {
         return field.getText();

@@ -6,16 +6,18 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
-public class Combobox implements WizardComponent{
+public class Combobox implements WizardComponent {
 
     @Getter
     public String id;
     private String title;
     private String selected;
-    private List<String> options;
+    private Map<String, Object> options;
     private boolean required = false;
     private int width, height;
 
@@ -26,12 +28,20 @@ public class Combobox implements WizardComponent{
     public Combobox(String id, String title, String selected, List<String> options) {
         this(id, title, selected, options, false);
     }
+
     public Combobox(String id, String title, String selected, List<String> options, boolean required) {
         this.id = id;
         this.title = title;
         this.selected = selected;
-        this.options = options;
+        this.options = new HashMap<>();
+        options.forEach((option) -> this.options.put(option, option));
         this.required = required;
+    }
+
+    public Combobox(String id, String title, Map<String, Object> options) {
+        this.id = id;
+        this.title = title;
+        this.options = options;
     }
 
     private JPanel panel;
@@ -57,10 +67,10 @@ public class Combobox implements WizardComponent{
 
     @Override
     public JComponent getComponent() {
-        String finalTitle = isRequired() ? title +"*" : title;
+        String finalTitle = isRequired() ? title + "*" : title;
         text = new JLabel(finalTitle);
-        comboBox = new JComboBox<String>(new Vector<>(options));
-        comboBox.addActionListener(e -> panel.setBorder(new EmptyBorder(0,0,0,0)));
+        comboBox = new JComboBox<String>(new Vector<>(options.keySet()));
+        comboBox.addActionListener(e -> panel.setBorder(new EmptyBorder(0, 0, 0, 0)));
         comboBox.setPreferredSize(new Dimension(240, 24));
         panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel.add(text);
@@ -70,6 +80,6 @@ public class Combobox implements WizardComponent{
 
     @Override
     public Object getValue() {
-        return comboBox.getSelectedItem();
+        return options.get(comboBox.getSelectedItem());
     }
 }
