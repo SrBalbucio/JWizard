@@ -3,6 +3,7 @@ package balbucio.jwizard.component;
 import balbucio.jwizard.WizardLang;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +19,18 @@ public class TermsBox implements WizardComponent{
     private String text;
     @NonNull
     private boolean required;
+    @Setter
+    private String textTerms = WizardLang.TEXT_TERMS;
+    @Setter
+    private String textTermsCheck = WizardLang.TEXT_TERMS_CHECK;
+
+    public TermsBox(@NonNull String id, @NonNull String text, @NonNull boolean required, String textTerms, String textTermsCheck) {
+        this.id = id;
+        this.text = text;
+        this.required = required;
+        this.textTerms = textTerms;
+        this.textTermsCheck = textTermsCheck;
+    }
 
     private JPanel panel;
     private JScrollPane scroll;
@@ -54,7 +67,7 @@ public class TermsBox implements WizardComponent{
 
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        obgText = new JLabel(WizardLang.TEXT_TERMS);
+        obgText = new JLabel(textTerms);
         titlePanel.add(obgText);
         titlePanel.setBorder(new EmptyBorder(0, 20, 0, 20));
         panel.add(titlePanel);
@@ -69,7 +82,7 @@ public class TermsBox implements WizardComponent{
 
         JPanel options = new JPanel();
         options.setLayout(new FlowLayout(FlowLayout.LEFT));
-        checkbox = new JCheckBox(WizardLang.TEXT_TERMS_CHECK);
+        checkbox = new JCheckBox(textTermsCheck);
         options.add(checkbox);
         options.setBorder(new EmptyBorder(0, 20, 0, 20));
         panel.add(options);
