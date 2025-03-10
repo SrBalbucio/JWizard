@@ -18,18 +18,19 @@ public class ProgressPage extends WizardPage {
     @Getter
     private JProgressBar progressBar = new JProgressBar(0, 100);
     @Getter
-    private JTextArea console;;
+    private JTextArea console;
 
-    public void addToProgress(int size){
+    public void addToProgress(int size) {
         progressBar.setValue(progressBar.getValue() + size);
     }
 
-    public void print(String msg){
+    public void print(String msg) {
+        if(console == null) return;
         console.append(msg);
     }
 
-    public void println(String msg){
-        console.append(msg+"\n");
+    public void println(String msg) {
+        print(msg + "\n");
     }
 
     @Override
@@ -37,9 +38,9 @@ public class ProgressPage extends WizardPage {
         return progressBar.getValue() >= 100;
     }
 
-    public JPanel getPanel(){
+    public JPanel getPanel() {
         JPanel panel = new JPanel();
-        panel.setBorder(new EmptyBorder(30,30,30,30));
+        panel.setBorder(new EmptyBorder(30, 30, 30, 30));
         BoxLayout box = new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(box);
         panel.add(progressBar);

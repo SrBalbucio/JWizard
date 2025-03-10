@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
@@ -50,17 +51,28 @@ public class TermsBox implements WizardComponent{
         panel = new JPanel();
         BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(layout);
+
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         obgText = new JLabel(WizardLang.TEXT_TERMS);
-        panel.add(obgText);
+        titlePanel.add(obgText);
+        titlePanel.setBorder(new EmptyBorder(0, 20, 0, 20));
+        panel.add(titlePanel);
+
         termsText = new JTextArea(text);
         termsText.setEditable(false);
         termsText.setBorder(new LineBorder(Color.BLACK));
-        termsText.setMargin(new Insets(20, 20, 20, 20));
         scroll = new JScrollPane(termsText);
-        scroll.setMaximumSize(new Dimension(1280, 200));
+        scroll.setBorder(new EmptyBorder(20, 20, 20, 20));
+//        scroll.setMaximumSize(new Dimension(1280, 200));
         panel.add(scroll);
+
+        JPanel options = new JPanel();
+        options.setLayout(new FlowLayout(FlowLayout.LEFT));
         checkbox = new JCheckBox(WizardLang.TEXT_TERMS_CHECK);
-        panel.add(checkbox);
+        options.add(checkbox);
+        options.setBorder(new EmptyBorder(0, 20, 0, 20));
+        panel.add(options);
         return panel;
     }
 

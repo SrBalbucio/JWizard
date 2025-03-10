@@ -4,7 +4,6 @@ import balbucio.jwizard.listener.WizardListener;
 import balbucio.jwizard.page.ProgressPage;
 import balbucio.jwizard.page.TermsPage;
 import balbucio.jwizard.page.WizardPage;
-import javafx.scene.control.ProgressBar;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -57,14 +56,14 @@ public class WizardTest {
                 "\n" +
                 "*© 2024 HyperPowered. Todos os direitos reservados.*", true)));
         WizardPage page = wizard.createPage("Informações Pessoais", "Complete todos os campos", null);
-        page.addComponent(new TextField("nome","Qual seu nome?", true),
+        page.addComponent(new TextField("nome", "Qual seu nome?", true),
                 new TextField("vulgo", "Qual seu vulgo?", true),
                 new TextField("email", "Qual seu email?"),
                 new Combobox("work", "Qual seu trabalho?", "Padeiro", Arrays.asList("Padeiro", "Desenvolvedor", "TI")));
         WizardPage page2 = wizard.createPage("Informações bancárias", "Complete todos os campos", null);
         page2.addComponent(new TextField("money", "Quanto dinheiro você tem no banco?", true),
-                new TextField("monthinvestiment","Quanto você pretende investir no futuro?"),
-                new TextField("montlymoney","Quanto você recebe mensalmente?"));
+                new TextField("monthinvestiment", "Quanto você pretende investir no futuro?"),
+                new TextField("montlymoney", "Quanto você recebe mensalmente?"));
         WizardPage page3 = wizard.createPage("Informações relacionais", "Complete todos os campos", null);
         page3.addComponent(new TextField("mae", "Qual nome da sua mae?", true),
                 new TextField("pai", "Qual nome do seu pai?"),
@@ -78,13 +77,14 @@ public class WizardTest {
         wizard.addListener(new WizardListener() {
             @Override
             public void changePage(WizardPage page, int index) {
-                if(index == 5) {
+                if (index == 5) {
                     Thread th = new Thread(() -> {
                         int i = 0;
                         while (i < 100) {
                             try {
                                 i++;
                                 progress.addToProgress(i);
+                                progress.println("Posição: " + i);
                                 Thread.sleep(1500);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -103,7 +103,7 @@ public class WizardTest {
             @Override
             public void finished(JWizard wizard, Map<String, Object> resultados) {
                 resultados.forEach((k, v) -> {
-                    System.out.println(k+" : "+v);
+                    System.out.println(k + " : " + v);
                 });
             }
         });
