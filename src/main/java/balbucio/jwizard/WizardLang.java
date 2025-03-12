@@ -9,4 +9,5 @@ public class WizardLang {
     public static String SELECT_FILE_BUTTON = "Selecionar arquivos...";
     public static String TEXT_TERMS = "Leia atentamente os Termos de Uso:";
     public static String TEXT_TERMS_CHECK = "Você concorda com os Termos de Uso?";
+    public static String CHIPS_LIST = "Opções selecionadas:";
 }

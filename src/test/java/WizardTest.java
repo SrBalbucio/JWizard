@@ -59,7 +59,8 @@ public class WizardTest {
         page.addComponent(new TextField("nome", "Qual seu nome?", true),
                 new TextField("vulgo", "Qual seu vulgo?", true),
                 new TextField("email", "Qual seu email?"),
-                new Combobox("work", "Qual seu trabalho?", "Padeiro", Arrays.asList("Padeiro", "Desenvolvedor", "TI")));
+                new Combobox("work", "Qual seu trabalho?", "Padeiro", Arrays.asList("Padeiro", "Desenvolvedor", "TI")),
+                new MultipleListBox("multiplelist", "Selecione as opções bb:", Arrays.asList("Novo Balanço", "Clickbait", "Devolve as Correntes", "Invisível")));
         WizardPage page2 = wizard.createPage("Informações bancárias", "Complete todos os campos", null);
         page2.addComponent(new TextField("money", "Quanto dinheiro você tem no banco?", true),
                 new TextField("monthinvestiment", "Quanto você pretende investir no futuro?"),

@@ -15,18 +15,19 @@ public class TextField implements WizardComponent {
     private String id;
     private String title;
     private JPanel panel;
+    private String defaultValue;
     @Getter
     @Setter
     private boolean required = false;
     @Getter
     @Setter
-    private int width = 240,  height = 24;
+    private int width = 240, height = 24;
 
     public TextField(String id, String title) {
         this(id, title, false);
     }
 
-    public TextField(String id, String title, boolean required){
+    public TextField(String id, String title, boolean required) {
         this.id = id;
         this.title = title;
         this.required = required;
@@ -52,10 +53,10 @@ public class TextField implements WizardComponent {
 
     @Override
     public JComponent getComponent() {
-        String finalTitle = isRequired() ? title +"*" : title;
+        String finalTitle = isRequired() ? title + "*" : title;
         text = new JLabel(finalTitle);
-        field = new JTextField();
-        field.addActionListener(e -> panel.setBorder(new EmptyBorder(0,0,0,0)));
+        field = new JTextField(defaultValue);
+        field.addActionListener(e -> panel.setBorder(new EmptyBorder(0, 0, 0, 0)));
         field.setPreferredSize(new Dimension(width, height));
         panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel.add(text);
@@ -63,8 +64,12 @@ public class TextField implements WizardComponent {
         return panel;
     }
 
-    public void setValue(String value){
-        field.setText(value);
+    public void setValue(String value) {
+        this.defaultValue = value;
+
+        if (field != null) {
+            field.setText(value);
+        }
     }
 
     @Override
