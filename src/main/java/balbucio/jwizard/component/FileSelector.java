@@ -15,7 +15,7 @@ public class FileSelector implements WizardComponent{
     private String id;
     private String title;
     private boolean required;
-    private File[] selectedFiles = null;
+    private File selectedFiles = null;
 
     public FileSelector(String id, String title){
         this(id, title, false);
@@ -62,8 +62,10 @@ public class FileSelector implements WizardComponent{
 
     public void search(){
         JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setMultiSelectionEnabled(false);
         chooser.showOpenDialog(null);
-        this.selectedFiles = chooser.getSelectedFiles();
+        this.selectedFiles = chooser.getSelectedFile();
     }
 
     @Override
