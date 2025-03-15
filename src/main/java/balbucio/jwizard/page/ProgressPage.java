@@ -14,6 +14,7 @@ public class ProgressPage extends WizardPage {
 
     public ProgressPage(String title, String description, Image icon) {
         super(title, description, icon);
+        console = new JTextArea();
     }
 
     @Getter
@@ -51,7 +52,6 @@ public class ProgressPage extends WizardPage {
 
         panel.add(progressBar);
 
-        console = new JTextArea();
         console.setEditable(false);
         console.setLineWrap(true);
         JScrollPane scroll = new JScrollPane(console);
