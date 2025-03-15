@@ -1,5 +1,6 @@
 package balbucio.jwizard.page;
 
+import balbucio.jwizard.WizardLang;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
@@ -25,7 +26,7 @@ public class ProgressPage extends WizardPage {
     }
 
     public void print(String msg) {
-        if(console == null) return;
+        if (console == null) return;
         console.append(msg);
     }
 
@@ -43,9 +44,18 @@ public class ProgressPage extends WizardPage {
         panel.setBorder(new EmptyBorder(30, 30, 30, 30));
         BoxLayout box = new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(box);
+
+//        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+//        titlePanel.add(new JLabel(WizardLang.PROGRESS_TITLE));
+//        panel.add(titlePanel);
+
         panel.add(progressBar);
-        panel.add((console = new JTextArea()));
+
+        console = new JTextArea();
         console.setEditable(false);
+        console.setLineWrap(true);
+        JScrollPane scroll = new JScrollPane(console);
+        panel.add(scroll);
         return panel;
     }
 }
