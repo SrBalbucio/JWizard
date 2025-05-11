@@ -56,7 +56,9 @@ public class WizardTest {
                 "\n" +
                 "*© 2024 HyperPowered. Todos os direitos reservados.*", true)));
         WizardPage page = wizard.createPage("Informações Pessoais", "Complete todos os campos", null);
-        page.addComponent(new TextField("nome", "Qual seu nome?", true),
+        page.addComponent(
+                new Label("Teste dos mais fortes já vistos no mundo, spnv"),
+                new TextField("nome", "Qual seu nome?", true),
                 new TextField("vulgo", "Qual seu vulgo?", true),
                 new TextField("email", "Qual seu email?"),
                 new Combobox("work", "Qual seu trabalho?", "Padeiro", Arrays.asList("Padeiro", "Desenvolvedor", "TI")),
