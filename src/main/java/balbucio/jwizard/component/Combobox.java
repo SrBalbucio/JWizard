@@ -47,6 +47,13 @@ public class Combobox implements WizardComponent {
         this.options = options;
     }
 
+    public Combobox(String id, String title, String selected, Map<String, Object> options) {
+        this.id = id;
+        this.title = title;
+        this.options = options;
+        this.selected = selected;
+    }
+
     private JPanel panel;
     private JLabel text;
     private JComboBox<String> comboBox;
