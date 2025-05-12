@@ -81,7 +81,7 @@ public class JWizard {
                 setPage(page);
             } else{
                 ConcurrentHashMap<String, Object> results = new ConcurrentHashMap<>();
-                pages.forEach(page1 -> results.putAll(page1.getResults()));
+                pages.forEach(resultPage -> results.putAll(resultPage.getResults()));
                 listeners.forEach(l -> l.finished(this, results));
                 dialog.setVisible(false);
                 dialog.dispose();

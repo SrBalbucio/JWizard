@@ -1,11 +1,14 @@
 package balbucio.jwizard.component;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +50,9 @@ public class Combobox implements WizardComponent {
     private JPanel panel;
     private JLabel text;
     private JComboBox<String> comboBox;
-
+    @Getter
+    @Setter
+    private ComboxUpdateListener updateListener;
 
     @Override
     public boolean isRequired() {
@@ -70,6 +75,9 @@ public class Combobox implements WizardComponent {
         String finalTitle = isRequired() ? title + "*" : title;
         text = new JLabel(finalTitle);
         comboBox = new JComboBox<String>(new Vector<>(options.keySet()));
+        comboBox.addItemListener((e) -> {
+            if (updateListener != null) updateListener.onUpdate(this, e.getItem());
+        });
         comboBox.addActionListener(e -> panel.setBorder(new EmptyBorder(0, 0, 0, 0)));
         comboBox.setPreferredSize(new Dimension(240, 24));
         panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -81,5 +89,9 @@ public class Combobox implements WizardComponent {
     @Override
     public Object getValue() {
         return options.get(comboBox.getSelectedItem());
+    }
+
+    public static interface ComboxUpdateListener {
+        public void onUpdate(Combobox component, Object value);
     }
 }
